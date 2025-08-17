@@ -1,5 +1,5 @@
 {
-  "name": "LANDrop",
+  "name": "landrop",
   "private": true,
   "scripts": {
     "build": "turbo run build",
