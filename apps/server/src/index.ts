@@ -1,13 +1,21 @@
-import express from "express";
-const app  = express()
-console.log(process.env.PORT)
+import { Server } from "socket.io";
+import { createServer } from "node:http";
+import { app } from "./app.ts";
 
-// app listening 
+const server = createServer(app);
+const io = new Server(server);
+
+// app listening
 try {
-    app.listen( process.env.PORT,  () => {
-      console.log(`App is listening on the port : ${process.env.PORT}` );
-    })
+  //socket connection setup
+  io.on("connection", (socket) => {
+    console.log("socket is connected");
+    socket.emit("hello world");
+  });
 
+  server.listen(process.env.PORT, () => {
+    console.log(`App is listening on the port : ${process.env.PORT}`);
+  });
 } catch (error) {
   console.log(`Error : ${error}`);
 }
