@@ -1,21 +1,17 @@
-import { Server } from "socket.io";
 import { createServer } from "node:http";
-import { app } from "./app.ts";
-
+import { rejects } from "node:assert";
+import { app } from "./app";
 const server = createServer(app);
-const io = new Server(server);
 
 // app listening
-try {
-  //socket connection setup
-  io.on("connection", (socket) => {
-    console.log("socket is connected");
-    socket.emit("hello world");
-  });
-
-  server.listen(process.env.PORT, () => {
-    console.log(`App is listening on the port : ${process.env.PORT}`);
-  });
-} catch (error) {
-  console.log(`Error : ${error}`);
+const serverStarted = ()=>{
+  return new Promise <void>  ((resolve, reject)=>{
+server.listen(process.env.PORT, () => {
+  console.log(`App is listening on the port : ${process.env.PORT}`);
+});
+  })
 }
+serverStarted()
+
+
+export { server,serverStarted };
