@@ -9,6 +9,7 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/socket.io": "^3.0.2",
     "@types/socket.io-client": "^3.0.0",
     "cors": "^2.8.5"
@@ -17,6 +18,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "express": "^5.1.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1"
   }
