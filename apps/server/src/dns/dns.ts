@@ -1,7 +1,7 @@
 import makeMdns from "multicast-dns";
 const mdns = makeMdns();
 
-const Devices: unknown[] = [];
+const Devices: any[] = [];
 
 (function connectToMdns() {
   mdns.on("response", function (response: any) {

@@ -7,6 +7,7 @@ import { app } from "./app";
 const server = createServer(app);
 
 // app listening
+
 const serverStarted = ()=>{
   return new Promise<void> ((resolve, reject)=>{
     server.listen(process.env.PORT, () => {  // here the server getting listend
@@ -57,3 +58,4 @@ io.on("connection", (socket) => {
 console.log("Socket server is ready!");
 
 export { server };
+
