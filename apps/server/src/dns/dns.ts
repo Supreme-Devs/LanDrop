@@ -4,33 +4,32 @@ const mdns = makeMdns();
 
 const Devices: any[] = [];
 
-let listofDevices:any[] = [];
+let listofDevices: any[] = [];
 
 (function connectToMdns() {
-  mdns.on("response", function (response: any) {
-    // console.log("got a response packet:", response.answers);
-    response.answers?.forEach((element: { name: any; }) => {
-      if(listofDevices.includes (element.name)) return;
-      else {
-        listofDevices.push(element.name)
-      }
-    });
-    console.log(listofDevices)
-  });
- 
-
-  // mdns.on("query", function (query) {
-  //   console.log("got a query packet:", query.questions);
-  //   //  console.log("authorities: ", query.authorities)
+  // mdns.on("response", function (response: any) {
+  //   // console.log("got a response packet:", response.answers);
+  //   response.answers?.forEach((element: { name: any }) => {
+  //     if (listofDevices.includes(element.name)) return;
+  //     else {
+  //       listofDevices.push(element.name);
+  //     }
+  //   });
+  //   console.log(listofDevices);
   // });
- 
-  // mdns.query([{name : 'Android-6.local',
-  //     type: 'A'
-  // }], (error: any)=>{
-  //     console.log(error)
-  // })
 
+  mdns.on("query", function (query) {
+    console.log("got a query packet:", query);
+    //  console.log("authorities: ", query.authorities)
+  });
 
+mdns.query({
+  questions:[{
+    name: '_services._dns-sd._udp.local',
+    type: 'PTR',
+    class: "IN"
+  }]
+})
 })();
 
 export { Devices };
