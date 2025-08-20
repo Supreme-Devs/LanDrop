@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun src/index.ts"
+    "dev": "bun --hot src/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -18,8 +18,12 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@emnapi/core": "^1.4.5",
+    "@emnapi/wasi-threads": "^1.0.4",
+    "@tybys/wasm-util": "^0.10.0",
     "express": "^5.1.0",
     "socket.io": "^4.8.1",
-    "socket.io-client": "^4.8.1"
+    "socket.io-client": "^4.8.1",
+    "ts-node": "^10.9.2"
   }
 }

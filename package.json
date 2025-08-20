@@ -24,6 +24,9 @@
     "packages/*"
   ],
   "dependencies": {
+    "@emnapi/core": "^1.4.5",
+    "@emnapi/wasi-threads": "^1.0.4",
+    "@tybys/wasm-util": "^0.10.0",
     "multicast-dns": "^7.2.5"
   },
   "module": "index.ts",
