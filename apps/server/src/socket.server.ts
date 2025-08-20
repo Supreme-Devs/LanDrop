@@ -1,16 +1,11 @@
-/*
 import { server } from "./index.ts";
 import { Server } from "socket.io";
 import { Devices } from "./dns/dns.ts";
-import { serverStarted } from "./index.ts";
 
 
-const io = new Server(server, {   // Problem: socket.io server created but http not listen
-const startSockerServer = async () => {
-  await serverStarted();
-
+// Problem: socket.io server created but http not listen
+const startSockerServer = () => {
   const io = new Server(server, {
-
     cors: {
       origin: process.env.CORS_ORIGIN, // or your frontend URL
       methods: ["GET", "POST"],
@@ -21,15 +16,26 @@ const startSockerServer = async () => {
   io.on("connection", (socket) => {
     console.log("socket is connected");
 
-    socket.emit("devices", Devices); // fix: devices: to devices
+    socket.emit("devices", {Devices: Devices}); // fix: devices: to devices
   });
+};
 
-});
+export { startSockerServer };
 
-*/
+
+
+
+
+
+
+
+
+
+
+
 
 /*
-import {server, serverStarted } from "./index.ts";
+import {server, serverStarted } from "./index. ts";
 import {Server} from "socket.io";
 import { Devices } from "./dns/dns.ts";
 
@@ -54,4 +60,3 @@ serverStarted().then(() => {
   console.log("Socket server is ready")
 });
 */
-

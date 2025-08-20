@@ -1,6 +1,12 @@
 import makeMdns from "multicast-dns";
-const mdns = makeMdns();
-
+const mdns = makeMdns({
+  interface: " 192.168.1.3", // Your WiFi IP address
+  port: 5353, // Standard mDNS port
+  ip: "224.0.0.251", // mDNS multicast address
+  ttl: 255, // Time to live for packets
+  loopback: true, // Include your own device
+  reuseAddr: true,
+});
 const Devices: any[] = [];
 
 (function connectToMdns() {
