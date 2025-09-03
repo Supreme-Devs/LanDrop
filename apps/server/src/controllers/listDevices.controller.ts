@@ -2,13 +2,15 @@
 import express from "express";
 import type { Request, Response, NextFunction } from "express";
 import { asyncHandler } from "../utils/asyncHandler.ts";
-import { listofDevices } from "../dns/dns";
+import { serviceofDevices } from "../dns/dns";
 
 //making a controller that decode
 const dataDecoder = asyncHandler(async (req: Request, res: Response) => {
   const data: string = req.body;
+  console.log(data)
+
   if (data == "start") {
-    listofDevices.map((e) => {
+    serviceofDevices.map((e) => {
       if (e.type == "TXT") {
         const rawTxt = e.data;
 

@@ -11,12 +11,15 @@ let serviceofDevices: any[] = [];
     response.answers?.forEach((element: any) => {
       if (!listofDevices.find((e) => e.name === element.name)) {
         listofDevices.push(element);
-        console.log(listofDevices)
+        console.log(listofDevices);
 
-        if (element.name.includes("_mi-connect._udp.local") && element.type === " TXT") {
+        if (
+          element.name.includes("_mi-connect._udp.local") &&
+          element.type === " TXT"
+        ) {
           if (!serviceofDevices.find((e) => e.name === element.name)) {
             serviceofDevices.push(element);
-            console.log(serviceofDevices)
+            console.log(serviceofDevices);
           }
         }
       }
@@ -32,7 +35,6 @@ let serviceofDevices: any[] = [];
       },
     ],
   });
-
 })();
 
-export {listofDevices}
+export { serviceofDevices };

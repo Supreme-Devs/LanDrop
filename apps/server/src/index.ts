@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { app } from "./app.ts";
 import { startSockerServer } from "./socket.server.ts";
-import "../src/dns/dns.ts"
+import "../src/dns/dns.ts";
 
 const server = createServer(app);
 

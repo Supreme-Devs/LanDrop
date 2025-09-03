@@ -30,7 +30,9 @@ app.use(
 app.use(express.static("./public/temp"));
 
 //adding router
-app.use("/app/v1/", router)
+app.use("/app/v1", router)
+
 
 app.use(errorMiddleware)
+
 export { app };
