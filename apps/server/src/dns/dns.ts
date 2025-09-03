@@ -24,11 +24,10 @@ let serviceofDevices: any[] = [];
       }
     });
   });
-    
+
   // logging the arrays
   console.log("List of Devices:", listofDevices);
-  console.log("Service of Devices:", serviceofDevices); 
-  
+  console.log("Service of Devices:", serviceofDevices);
 
   // mdns.on("query", function (query) {
   //   console.log("got a query packet:", query);
