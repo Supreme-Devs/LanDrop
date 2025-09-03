@@ -1,6 +1,5 @@
 import { server } from "./index.ts";
 import { Server } from "socket.io";
-import { Devices } from "./dns/dns.ts";
 
 
 // Problem: socket.io server created but http not listen
@@ -16,7 +15,7 @@ const startSockerServer = () => {
   io.on("connection", (socket) => {
     console.log("socket is connected");
 
-    socket.emit("devices", {Devices: Devices}); // fix: devices: to devices
+    socket.emit("devices",); // fix: devices: to devices
   });
 };
 
