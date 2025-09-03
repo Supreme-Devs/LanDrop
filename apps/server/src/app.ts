@@ -1,7 +1,7 @@
 import express, { urlencoded } from "express";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/errormiddleware.ts";
-
+import { router } from "./routes/routes.ts";
 const app = express();
 
 //cors setup
@@ -28,6 +28,9 @@ app.use(
 );
 
 app.use(express.static("./public/temp"));
+
+//adding router
+app.use("/app/v1/", router)
 
 app.use(errorMiddleware)
 export { app };

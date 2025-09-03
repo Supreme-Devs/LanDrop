@@ -4,12 +4,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun --hot src/index.ts"
+    "dev": "bun --watch src/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/nodemon": "^3.1.1",
     "@types/socket.io": "^3.0.2",
     "@types/socket.io-client": "^3.0.0",
     "cors": "^2.8.5"
@@ -22,6 +23,7 @@
     "@emnapi/wasi-threads": "^1.0.4",
     "@tybys/wasm-util": "^0.10.0",
     "express": "^5.1.0",
+    "nodemon": "^3.1.10",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "ts-node": "^10.9.2"

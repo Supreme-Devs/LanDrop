@@ -5,44 +5,34 @@ let listofDevices: any[] = [];
 let serviceofDevices: any[] = [];
 
 (function connectToMdns() {
+  console.log("mDNS discovery started");
+
   mdns.on("response", function (response: any) {
-    // console.log("got a response packet:", response.answers);
     response.answers?.forEach((element: any) => {
-      if (listofDevices.includes(element)) return;
-      else {
+      if (!listofDevices.find((e) => e.name === element.name)) {
         listofDevices.push(element);
-        if (
-          element.name ==
-            '{"nm":"fing#","as":"[8193, 8194]","ip":"4"}._mi-connect._udp.local' &&
-          element.type == "SRV"
-        ) {
-          if (serviceofDevices.includes(element)) return;
-          else {
+        console.log(listofDevices)
+
+        if (element.name.includes("_mi-connect._udp.local") && element.type === " TXT") {
+          if (!serviceofDevices.find((e) => e.name === element.name)) {
             serviceofDevices.push(element);
+            console.log(serviceofDevices)
           }
         }
       }
     });
   });
 
-  // logging the arrays
-  console.log("List of Devices:", listofDevices);
-  console.log("Service of Devices:", serviceofDevices);
-
-  // mdns.on("query", function (query) {
-  //   console.log("got a query packet:", query);
-  //   //  console.log("authorities: ", query.authorities)
-  // });
-
+  // Send query to discover service types
   mdns.query({
     questions: [
       {
-        name: '{"nm":"fing#","as":"[8193, 8194]","ip":"4"}._mi-connect._udp.local',
-        type: "SRV",
-        class: "IN",
+        name: "_services._dns-sd._udp.local",
+        type: "PTR",
       },
     ],
   });
+
 })();
 
-export { listofDevices, serviceofDevices };
+export {listofDevices}
