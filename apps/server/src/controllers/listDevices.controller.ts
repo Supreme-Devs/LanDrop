@@ -2,7 +2,7 @@
 import express from "express";
 import type { Request, Response, NextFunction } from "express";
 import { asyncHandler } from "../utils/asyncHandler.ts";
-import { serviceofDevices } from "../dns/dns";
+import { serviceofDevices } from "../dns/dns.ts";
 
 //making a controller that decode
 const dataDecoder = asyncHandler(async (req: Request, res: Response) => {
