@@ -1,8 +1,14 @@
 import makeMdns from "multicast-dns";
 const mdns = makeMdns();
 
-let listofDevices: any[] = [];
-let serviceofDevices: any[] = [];
+export interface dnsData {
+  name: string;
+  type: string;
+  data: Buffer[];
+}
+
+let listofDevices: dnsData[] = [];
+export const serviceofDevices: dnsData[] = [];
 
 (function connectToMdns() {
   console.log("mDNS discovery started");
@@ -11,7 +17,6 @@ let serviceofDevices: any[] = [];
     response.answers?.forEach((element: any) => {
       if (!listofDevices.find((e) => e.name === element.name)) {
         listofDevices.push(element);
-        console.log(listofDevices);
 
         if (
           element.name.includes("_mi-connect._udp.local") &&
@@ -19,7 +24,6 @@ let serviceofDevices: any[] = [];
         ) {
           if (!serviceofDevices.find((e) => e.name === element.name)) {
             serviceofDevices.push(element);
-            console.log(serviceofDevices);
           }
         }
       }
@@ -32,9 +36,10 @@ let serviceofDevices: any[] = [];
       {
         name: "_services._dns-sd._udp.local",
         type: "PTR",
+        class: "IN",
       },
     ],
   });
 })();
 
-export { serviceofDevices };
+export { listofDevices };
