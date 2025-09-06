@@ -17,7 +17,8 @@ export const serviceofDevices: dnsData[] = [];
     response.answers?.forEach((element: any) => {
       if (!listofDevices.find((e) => e.name === element.name)) {
         listofDevices.push(element);
-
+        console.log(listofDevices)
+        
         if (
           element.name.includes("_mi-connect._udp.local") &&
           element.type === " TXT"

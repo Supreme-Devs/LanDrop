@@ -13,6 +13,7 @@ const client = await Bun.udpSocket({
 
 
 });
-client.send("Hello!", 41234, "255.255.255.255");
+
+// client.send("Hello!", 41234, "255.255.255.255");
 
 

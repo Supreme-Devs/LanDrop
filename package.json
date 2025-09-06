@@ -19,10 +19,6 @@
     "node": ">=18"
   },
   "packageManager": "bun@1.2.19",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "dependencies": {
     "@emnapi/core": "^1.4.5",
     "@emnapi/wasi-threads": "^1.0.4",
