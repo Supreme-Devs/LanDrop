@@ -13,10 +13,13 @@ const startSockerServer = () => {
   });
 
   //socket connection setup
-  io.on("connection", (socket) => {
-    console.log("socket is connected");
+  io.on("message", (socket) => {
 
-    socket.emit("devices", listofDevices); // fix: devices: to devices
+    socket.on("chat message", (msg: string)=>{
+      console.log("message :" + msg)
+    })
+
+    socket.emit("message", "hi there"); // fix: devices: to devices
   });
 };
 
