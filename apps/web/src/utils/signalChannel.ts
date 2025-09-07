@@ -12,7 +12,7 @@ export class messanger {
   // manual connector
   connect() {
     this.socket.connect();
-    return " socket is connected";
+    return {message: " socket is connected"}
   }
 
   disconnect() {
