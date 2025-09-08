@@ -3,35 +3,56 @@ import { messangerService } from "@/utils/signalChannel";
 
 // creating the server class
 export class webRTCPeer {
-  private connection: RTCPeerConnection;
+  private connection: RTCPeerConnection | null = null;
+  private initialized = false;
 
-  constructor(configuration: object) {
-    this.connection = new RTCPeerConnection(configuration);
+  constructor(private configuration: RTCConfiguration) {}
+
+  async initialize() {
+   
+    try {
+      this.connection = new RTCPeerConnection(this.configuration);
+      this.initialized = true;
+      if (this.connection && this.initialized) {
+        return "Server successfully initialized"
+      }
+    } catch (error) {
+      console.error("error while creating RTC server");
+    }
   }
 
   async makeCall() {
+    //  check if the connection is setup or not
+    if (!this.connection) {
+      return "make initialization call";
+    }
+
     const pingingServer: { message: string } = messangerService.connect();
-    if ((pingingServer && pingingServer.message != "")) {
+    if (pingingServer && pingingServer.message != "") {
+      console.log("connected to the socket")
       // setting up the ice candidate
       this.connection.onicecandidate = (event) => {
         if (event.candidate !== null) {
           // sending this to the signaling server
           messangerService.shareVal(event.candidate);
-        } else {
-          // for safe case scenario
-          setTimeout(() => {
-            this.connection.close();
-          }, 3000);
         }
-
-        //  creating offer for the server
-        const func = async () => {
-          const offer = await this.connection.createOffer();
-          await this.connection.setLocalDescription(offer);
-        };
-        func();
       };
+
+      //  creating offer for the server
+      try {
+        const offer = await this.connection.createOffer();
+        await this.connection.setLocalDescription(offer);
+      } catch (error) {
+        console.error("failed to create offer");
+      }
     }
+  }
+
+  closeCall() {
+    this.connection?.close();
+  }
+  get ready() {
+    return this.initialized && this.connection !== null;
   }
 }
 

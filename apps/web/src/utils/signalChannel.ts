@@ -7,12 +7,13 @@ export class messanger {
     this.socket = io(connectionUrl, {
       transports: ["websocket"],
     });
+    console.log("socket connected");
+    this.socket.emit("hello", "klpd hello world");
   }
 
   // manual connector
   connect() {
-    this.socket.connect();
-    return {message: " socket is connected"}
+    return { message: " socket is connected" };
   }
 
   disconnect() {
