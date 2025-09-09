@@ -9,12 +9,11 @@ export class webRTCPeer {
   constructor(private configuration: RTCConfiguration) {}
 
   async initialize() {
-   
     try {
       this.connection = new RTCPeerConnection(this.configuration);
       this.initialized = true;
       if (this.connection && this.initialized) {
-        return "Server successfully initialized"
+        return "Server successfully initialized";
       }
     } catch (error) {
       console.error("error while creating RTC server");
@@ -29,12 +28,21 @@ export class webRTCPeer {
 
     const pingingServer: { message: string } = messangerService.connect();
     if (pingingServer && pingingServer.message != "") {
-      console.log("connected to the socket")
+      const dataChannel = this.connection.createDataChannel("");
+      if (dataChannel) {
+        console.log("successfully created data channel");
+      }
       // setting up the ice candidate
       this.connection.onicecandidate = (event) => {
         if (event.candidate !== null) {
+          const ipv4Regex: RegExp =
+            /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/;
+          const ip = event.candidate.candidate.match(ipv4Regex);
+          if (ip) {
+            console.log(ip);
+          }
           // sending this to the signaling server
-          messangerService.shareVal(event.candidate);
+          messangerService.shareVal(ip);
         }
       };
 

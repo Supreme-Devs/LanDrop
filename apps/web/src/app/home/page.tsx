@@ -8,9 +8,9 @@ export default function Home() {
     const initRTC = async() => {
       if(typeof window !== undefined){
        const isInitialized = await webRTCService.initialize()
-       console.log(isInitialized)
 
          if(isInitialized !== undefined || null ){
+          console.log("window is available")
          await webRTCService.makeCall()
          }
       }
