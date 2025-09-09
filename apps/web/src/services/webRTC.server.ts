@@ -35,7 +35,7 @@ export class webRTCPeer {
       // setting up the ice candidate
       this.connection.onicecandidate = (event) => {
         if (event.candidate !== null) {
-     
+         console.log(event.candidate)
           // sending this to the signaling server
           messangerService.shareVal(event.candidate);
         }
@@ -45,7 +45,7 @@ export class webRTCPeer {
       try {
         const offer = await this.connection.createOffer();
         await this.connection.setLocalDescription(offer);
-        console.log(offer)
+        
       } catch (error) {
         console.error("failed to create offer");
       }
