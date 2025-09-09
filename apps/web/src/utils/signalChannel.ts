@@ -38,6 +38,7 @@ export class messanger {
 
       // for recieving the message
       founderSocket.on("main_message", (message) => {
+        console.log(message)
         resolve(message);
       });
 

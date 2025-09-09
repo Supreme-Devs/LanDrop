@@ -35,14 +35,9 @@ export class webRTCPeer {
       // setting up the ice candidate
       this.connection.onicecandidate = (event) => {
         if (event.candidate !== null) {
-          const ipv4Regex: RegExp =
-            /\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b/;
-          const ip = event.candidate.candidate.match(ipv4Regex);
-          if (ip) {
-            console.log(ip);
-          }
+     
           // sending this to the signaling server
-          messangerService.shareVal(ip);
+          messangerService.shareVal(event.candidate);
         }
       };
 
@@ -50,6 +45,7 @@ export class webRTCPeer {
       try {
         const offer = await this.connection.createOffer();
         await this.connection.setLocalDescription(offer);
+        console.log(offer)
       } catch (error) {
         console.error("failed to create offer");
       }
