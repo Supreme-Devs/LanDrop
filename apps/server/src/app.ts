@@ -31,7 +31,10 @@ app.use(express.static("./public/temp"));
 
 //adding router
 app.use("/app/v1", router)
-
+app.post("/random", (req, res)=>{
+  const data = req.body;
+  res.json(data)
+})
 
 app.use(errorMiddleware)
 
