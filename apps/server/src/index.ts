@@ -1,4 +1,5 @@
-import { createServer } from "node:http";
+// import { createServer } from "node:http";
+import {createServer} from "http"
 import { app } from "./app.ts";
 import { startSockerServer } from "./socket.server.ts";
 import "../src/dns/dns.ts";
