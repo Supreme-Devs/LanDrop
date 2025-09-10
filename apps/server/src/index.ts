@@ -2,44 +2,40 @@ import { createServer } from "node:http";
 import { app } from "./app.ts";
 import { startSockerServer } from "./socket.server.ts";
 import "../src/dns/dns.ts";
-import "../src/services/udpSocket.ts"
+import "../src/services/udpSocket.ts";
+import ngrok from "@ngrok/ngrok"
+
 
 const server = createServer(app);
 
 // app listening
 
-const serverStarted = () => {
-  return new Promise<void>((resolve, reject) => {
-    server.listen(process.env.PORT, () => {
-      // here the server getting listend
-      console.log(`App is listening on the port : ${process.env.PORT}`);
+const serverStarted = async() => {
+ console.log("Initializing Ngrok Tunnel....")
+  
+ const url = await ngrok.connect({
+  proto: "http",
+  authtoken: process.env.NGROK_AUTHTOKEN,
+  hostname: process.env.NGROK_DOMAIN ,
+  addr: process.env.PORT
+ })
 
-      // start the socket server
-      startSockerServer();
-      resolve(); // Fixed: added resolve()
-    });
+ console.log("server listening on url," , url )
 
-    server.on("error", (err) => {
-      reject(err);
-    });
+  server.listen(process.env.PORT, () => {
+    // here the server getting listend
+    console.log(`App is listening on the port : ${process.env.PORT}`);
+
+    // start the socket server
+    startSockerServer();
   });
+
+  server.on("error", (err) => {});
 };
 
 serverStarted();
 
 export { server };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
