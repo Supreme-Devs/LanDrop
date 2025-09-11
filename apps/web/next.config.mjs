@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
+import  { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   /* config options here */
  allowedDevOrigins: ["192.168.1.15"],
  async redirects() {
