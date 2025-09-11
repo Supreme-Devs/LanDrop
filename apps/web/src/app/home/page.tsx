@@ -1,7 +1,6 @@
 "use client";
-import Image from "next/image";
 import React, { useEffect } from "react";
-import { webRTCService } from "@/services/webRTC.server";
+import { webRTCService } from "@/services/webRTC.client";
 
 export default function Home() {
   useEffect(() => {
