@@ -28,9 +28,5 @@
     "multicast-dns": "^7.2.5"
   },
   "module": "index.ts",
-  "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+  "type": "module"
 }
